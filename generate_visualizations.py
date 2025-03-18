@@ -8,6 +8,7 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from tqdm.auto import tqdm
 import shutil
+import json
 
 # Create static folder if it doesn't exist
 if not os.path.exists('static'):
@@ -365,6 +366,8 @@ def create_comprehensive_interactive_viz():
     return fig
 
 # Create an improved country-pair visualization with dyadic selection
+import json  # Add this at the top of your file if not already there
+
 def create_country_pair_viz():
     print("Creating improved country pair visualization for dyadic analysis...")
     
@@ -662,8 +665,8 @@ def create_country_pair_viz():
     html_content = html_content.replace("{{ DYAD_DATA }}", dyad_js_data)
     html_content = html_content.replace("{{ INITIAL_DATA }}", initial_data)
     
-    # Write HTML to file
-    with open("country_pair_viz.html", "w") as f:
+    # Write HTML to file - FIXED: Save to static directory
+    with open("static/country_pair_viz.html", "w") as f:
         f.write(html_content)
     
     print("Dynamic country pair visualization created")

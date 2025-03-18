@@ -1,0 +1,246 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>COLT Dataset Analysis Dashboard</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 20px;
+                background-color: #f5f5f5;
+            }
+            h1, h2, h3 {
+                color: #333;
+            }
+            h1 {
+                text-align: center;
+                padding: 20px 0;
+                border-bottom: 2px solid #ddd;
+            }
+            .section {
+                background: white;
+                padding: 20px;
+                margin: 20px 0;
+                border-radius: 8px;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            }
+            .viz-container {
+                margin-top: 30px;
+            }
+            .img-container {
+                margin: 20px 0;
+                text-align: center;
+            }
+            .img-container img {
+                max-width: 100%;
+                height: auto;
+                border-radius: 4px;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            }
+            iframe {
+                width: 100%;
+                height: 700px;
+                border: none;
+                margin: 20px 0;
+                border-radius: 4px;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            }
+            .footer {
+                text-align: center;
+                padding: 20px;
+                color: #666;
+                font-size: 0.9em;
+                margin-top: 50px;
+                border-top: 1px solid #ddd;
+            }
+            .tabs {
+                display: flex;
+                margin: 20px 0;
+                border-bottom: 1px solid #ddd;
+                flex-wrap: wrap;
+            }
+            .tab {
+                padding: 10px 20px;
+                cursor: pointer;
+                border: 1px solid #ddd;
+                border-bottom: none;
+                border-radius: 5px 5px 0 0;
+                background-color: #f1f1f1;
+                margin-right: 5px;
+                margin-bottom: 5px;
+            }
+            .tab.active {
+                background-color: white;
+                border-bottom: 1px solid white;
+                margin-bottom: -1px;
+            }
+            .tab-content {
+                display: none;
+                padding: 20px;
+                border: 1px solid #ddd;
+                border-top: none;
+                border-radius: 0 0 5px 5px;
+            }
+            .tab-content.active {
+                display: block;
+            }
+            .grid-container {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+                margin: 20px 0;
+            }
+            @media (max-width: 800px) {
+                .grid-container {
+                    grid-template-columns: 1fr;
+                }
+            }
+            .grid-item {
+                background: white;
+                padding: 15px;
+                border-radius: 5px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+        </style>
+        <script>
+            function openTab(evt, tabName) {
+                var i, tabcontent, tablinks;
+                tabcontent = document.getElementsByClassName("tab-content");
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].className = tabcontent[i].className.replace(" active", "");
+                }
+                tablinks = document.getElementsByClassName("tab");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+                document.getElementById(tabName).className += " active";
+                evt.currentTarget.className += " active";
+            }
+            
+            window.onload = function() {
+                // Open the first tab by default
+                document.getElementsByClassName("tab")[0].click();
+            };
+        </script>
+    </head>
+    <body>
+        <h1>COLT Dataset - Comprehensive Diplomatic Travel Analysis Dashboard</h1>
+        
+        <div class="section">
+            <h2>About the Dataset</h2>
+            <p>This dashboard provides a comprehensive analysis of the Country and Organization Leader Travel (COLT) dataset from the Frederick S. Pardee Institute for International Futures at the University of Denver. The dataset tracks diplomatic travel of heads of government and state from 1990 to 2024, offering insights into global diplomatic relations, patterns, and trends.</p>
+        </div>
+        
+        <div class="section">
+            <h2>Dashboard Contents</h2>
+            
+            <div class="tabs">
+                <button class="tab" onclick="openTab(event, 'tab-static')">Static Visualizations</button>
+                <button class="tab" onclick="openTab(event, 'tab-comprehensive')">Top Countries & Leaders</button>
+                <button class="tab" onclick="openTab(event, 'tab-country-pairs')">Country Pair Analysis</button>
+                <button class="tab" onclick="openTab(event, 'tab-leader-timeline')">Leader Timeline</button>
+                <button class="tab" onclick="openTab(event, 'tab-diversity')">Diplomatic Diversity</button>
+            </div>
+            
+            <div id="tab-static" class="tab-content">
+                <h3>Static Visualizations</h3>
+                <p>These visualizations provide a comprehensive overview of diplomatic travel patterns from the COLT dataset.</p>
+                
+                <div class="grid-container">
+                    <div class="grid-item">
+                        <h4>Diplomatic Trips Over Time</h4>
+                        <div class="img-container">
+                            <img src="trips_per_year.png" alt="Trips per year">
+                        </div>
+                        <p>This visualization shows the number of diplomatic trips taken by heads of government each year from 1990 to 2024.</p>
+                    </div>
+                    
+                    <div class="grid-item">
+                        <h4>Top Destinations</h4>
+                        <div class="img-container">
+                            <img src="top_destinations.png" alt="Top destinations">
+                        </div>
+                        <p>This chart displays the top 10 most visited countries by heads of government.</p>
+                    </div>
+                    
+                    <div class="grid-item">
+                        <h4>Regional Distribution</h4>
+                        <div class="img-container">
+                            <img src="region_distribution.png" alt="Region distribution">
+                        </div>
+                        <p>This pie chart shows the distribution of diplomatic visits across different regions of the world.</p>
+                    </div>
+                    
+                    <div class="grid-item">
+                        <h4>Trip Duration</h4>
+                        <div class="img-container">
+                            <img src="trip_duration.png" alt="Trip duration">
+                        </div>
+                        <p>This histogram displays the distribution of diplomatic trip durations, with the mean and median highlighted.</p>
+                    </div>
+                    
+                    <div class="grid-item">
+                        <h4>Top Leaders</h4>
+                        <div class="img-container">
+                            <img src="top_leaders.png" alt="Top leaders">
+                        </div>
+                        <p>This chart shows the top 15 most traveled heads of government in the dataset.</p>
+                    </div>
+                    
+                    <div class="grid-item">
+                        <h4>Travel Between Regions</h4>
+                        <div class="img-container">
+                            <img src="region_flow_heatmap.png" alt="Region flow heatmap">
+                        </div>
+                        <p>This heatmap shows the flow of diplomatic travel between different regions, highlighting the most active regional relationships.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="tab-comprehensive" class="tab-content">
+                <h3>Comprehensive Trips Visualization</h3>
+                <p>This visualization shows the top 15 countries in three categories: most visited countries, countries with the most diplomatic trips, and countries with the most diverse destinations. Use the dropdown menus to select categories and countries.</p>
+                <iframe src="comprehensive_trips_viz.html"></iframe>
+            </div>
+            
+            <div id="tab-country-pairs" class="tab-content">
+                <h3>Country Pair Analysis</h3>
+                <p>This visualization allows you to analyze diplomatic visits between specific country pairs over time. Use the dropdowns to select visiting and visited countries. You can select any combination of countries to see their diplomatic relationship over time.</p>
+                <iframe src="country_pair_viz.html"></iframe>
+            </div>
+            
+            <div id="tab-leader-timeline" class="tab-content">
+                <h3>Leader Timeline Visualization</h3>
+                <p>This visualization shows the diplomatic activity of the top 15 leaders over time. Use the dropdown to select specific leaders.</p>
+                <iframe src="leader_timeline_viz.html"></iframe>
+            </div>
+            
+            <div id="tab-diversity" class="tab-content">
+                <h3>Diplomatic Diversity Visualization</h3>
+                <p>This bubble chart visualization shows the diversity of diplomatic travel for top countries, with bubble size representing total trips and color representing the number of unique destinations visited.</p>
+                <iframe src="diversity_viz.html"></iframe>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Key Findings</h2>
+            <ul>
+                <li>The overall number of diplomatic trips has generally increased from 1990 to 2024, with notable fluctuations during global events.</li>
+                <li>European countries dominate both as visitors and destinations, highlighting the density of diplomatic relations within Europe.</li>
+                <li>Some countries show clear patterns of regional focus, while others display more global diplomatic engagement.</li>
+                <li>Top leaders from major powers demonstrate the most consistent diplomatic travel activity over time.</li>
+                <li>The United States, China, and major European powers are among the most frequently visited destinations.</li>
+                <li>International organizations like the UN show distinctive travel patterns compared to individual countries.</li>
+            </ul>
+        </div>
+        
+        <div class="footer">
+            <p>Data Source: Country and Organization Leader Travel (COLT) dataset</p>
+            <p>Frederick S. Pardee Institute for International Futures at the University of Denver</p>
+            <p>Analysis date: March 2025</p>
+        </div>
+    </body>
+    </html>
+    

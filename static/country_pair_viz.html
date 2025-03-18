@@ -1,0 +1,716 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Country Pair Analysis</title>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 20px;
+                background-color: #f5f5f5;
+            }
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                background-color: white;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            }
+            h1 {
+                color: #333;
+                text-align: center;
+            }
+            .description {
+                margin-bottom: 20px;
+            }
+            .control-panel {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                padding: 15px;
+                background-color: #eef6ff;
+                border-radius: 5px;
+                margin-bottom: 20px;
+            }
+            .selector-group {
+                display: flex;
+                flex-direction: column;
+                margin: 0 10px;
+            }
+            .selector-group label {
+                font-weight: bold;
+                margin-bottom: 5px;
+                color: #0066cc;
+            }
+            select {
+                padding: 8px;
+                border-radius: 4px;
+                border: 1px solid #ccc;
+                min-width: 200px;
+            }
+            button {
+                padding: 8px 15px;
+                background-color: #0066cc;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                font-weight: bold;
+            }
+            button:hover {
+                background-color: #0055aa;
+            }
+            #plotContainer {
+                height: 600px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Diplomatic Visits Between Countries</h1>
+            <div class="description">
+                This visualization allows you to analyze diplomatic visits between specific country pairs over time. 
+                Select both a visiting country and a visited country to see their specific relationship, or use the
+                pre-loaded options to explore key diplomatic relationships.
+            </div>
+            
+            <div class="control-panel">
+                <div class="selector-group">
+                    <label for="visitingCountry">Select Visiting Country:</label>
+                    <select id="visitingCountry">
+                        <option value="">-- Select a country --</option>
+                        <option value="Afghanistan">Afghanistan</option>
+<option value="African Union (AU)">African Union (AU)</option>
+<option value="Albania">Albania</option>
+<option value="Algeria">Algeria</option>
+<option value="Andorra">Andorra</option>
+<option value="Angola">Angola</option>
+<option value="Antigua and Barbuda">Antigua and Barbuda</option>
+<option value="Argentina">Argentina</option>
+<option value="Armenia">Armenia</option>
+<option value="Association of Southeast Asian Nations (ASEAN)">Association of Southeast Asian Nations (ASEAN)</option>
+<option value="Australia">Australia</option>
+<option value="Austria">Austria</option>
+<option value="Azerbaijan">Azerbaijan</option>
+<option value="Bahamas">Bahamas</option>
+<option value="Bahrain">Bahrain</option>
+<option value="Bangladesh">Bangladesh</option>
+<option value="Barbados">Barbados</option>
+<option value="Belarus">Belarus</option>
+<option value="Belgium">Belgium</option>
+<option value="Belize">Belize</option>
+<option value="Benin">Benin</option>
+<option value="Bhutan">Bhutan</option>
+<option value="Bolivia">Bolivia</option>
+<option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
+<option value="Botswana">Botswana</option>
+<option value="Brazil">Brazil</option>
+<option value="Brunei">Brunei</option>
+<option value="Bulgaria">Bulgaria</option>
+<option value="Burkina Faso">Burkina Faso</option>
+<option value="Burundi">Burundi</option>
+<option value="Cabo Verde">Cabo Verde</option>
+<option value="Cambodia">Cambodia</option>
+<option value="Cameroon">Cameroon</option>
+<option value="Canada">Canada</option>
+<option value="Central African Republic">Central African Republic</option>
+<option value="Chad">Chad</option>
+<option value="Chile">Chile</option>
+<option value="China">China</option>
+<option value="Colombia">Colombia</option>
+<option value="Comoros">Comoros</option>
+<option value="Congo-Brazzaville">Congo-Brazzaville</option>
+<option value="Congo-Kinshasa">Congo-Kinshasa</option>
+<option value="Costa Rica">Costa Rica</option>
+<option value="Cote d'Ivoire">Cote d'Ivoire</option>
+<option value="Croatia">Croatia</option>
+<option value="Cuba">Cuba</option>
+<option value="Cyprus">Cyprus</option>
+<option value="Czechia">Czechia</option>
+<option value="Czechoslovakia">Czechoslovakia</option>
+<option value="Denmark">Denmark</option>
+<option value="Djibouti">Djibouti</option>
+<option value="Dominica">Dominica</option>
+<option value="Dominican Republic">Dominican Republic</option>
+<option value="East Germany">East Germany</option>
+<option value="Ecuador">Ecuador</option>
+<option value="Egypt">Egypt</option>
+<option value="El Salvador">El Salvador</option>
+<option value="Equatorial Guinea">Equatorial Guinea</option>
+<option value="Eritrea">Eritrea</option>
+<option value="Estonia">Estonia</option>
+<option value="Eswatini">Eswatini</option>
+<option value="Ethiopia">Ethiopia</option>
+<option value="European Commission (EC)">European Commission (EC)</option>
+<option value="Fiji">Fiji</option>
+<option value="Finland">Finland</option>
+<option value="France">France</option>
+<option value="Gabon">Gabon</option>
+<option value="Gambia">Gambia</option>
+<option value="Georgia">Georgia</option>
+<option value="Germany">Germany</option>
+<option value="Ghana">Ghana</option>
+<option value="Greece">Greece</option>
+<option value="Grenada">Grenada</option>
+<option value="Guatemala">Guatemala</option>
+<option value="Guinea">Guinea</option>
+<option value="Guinea-Bissau">Guinea-Bissau</option>
+<option value="Guyana">Guyana</option>
+<option value="Haiti">Haiti</option>
+<option value="Holy See">Holy See</option>
+<option value="Honduras">Honduras</option>
+<option value="Hungary">Hungary</option>
+<option value="Iceland">Iceland</option>
+<option value="India">India</option>
+<option value="Indonesia">Indonesia</option>
+<option value="International Monetary Fund (IMF)">International Monetary Fund (IMF)</option>
+<option value="Iraq">Iraq</option>
+<option value="Ireland">Ireland</option>
+<option value="Israel">Israel</option>
+<option value="Italy">Italy</option>
+<option value="Jamaica">Jamaica</option>
+<option value="Japan">Japan</option>
+<option value="Jordan">Jordan</option>
+<option value="Kazakhstan">Kazakhstan</option>
+<option value="Kenya">Kenya</option>
+<option value="Kiribati">Kiribati</option>
+<option value="Kosovo">Kosovo</option>
+<option value="Kuwait">Kuwait</option>
+<option value="Kyrgyzstan">Kyrgyzstan</option>
+<option value="Laos">Laos</option>
+<option value="Latvia">Latvia</option>
+<option value="Lebanon">Lebanon</option>
+<option value="Lesotho">Lesotho</option>
+<option value="Liberia">Liberia</option>
+<option value="Libya">Libya</option>
+<option value="Liechtenstein">Liechtenstein</option>
+<option value="Lithuania">Lithuania</option>
+<option value="Luxembourg">Luxembourg</option>
+<option value="Madagascar">Madagascar</option>
+<option value="Malawi">Malawi</option>
+<option value="Malaysia">Malaysia</option>
+<option value="Maldives">Maldives</option>
+<option value="Mali">Mali</option>
+<option value="Malta">Malta</option>
+<option value="Marshall Islands">Marshall Islands</option>
+<option value="Mauritania">Mauritania</option>
+<option value="Mauritius">Mauritius</option>
+<option value="Mexico">Mexico</option>
+<option value="Micronesia">Micronesia</option>
+<option value="Moldova">Moldova</option>
+<option value="Monaco">Monaco</option>
+<option value="Mongolia">Mongolia</option>
+<option value="Montenegro">Montenegro</option>
+<option value="Morocco">Morocco</option>
+<option value="Mozambique">Mozambique</option>
+<option value="Myanmar">Myanmar</option>
+<option value="Namibia">Namibia</option>
+<option value="Nauru">Nauru</option>
+<option value="Nepal">Nepal</option>
+<option value="Netherlands">Netherlands</option>
+<option value="New Zealand">New Zealand</option>
+<option value="Nicaragua">Nicaragua</option>
+<option value="Niger">Niger</option>
+<option value="Nigeria">Nigeria</option>
+<option value="North Atlantic Treaty Organization (NATO)">North Atlantic Treaty Organization (NATO)</option>
+<option value="North Korea">North Korea</option>
+<option value="North Macedonia">North Macedonia</option>
+<option value="Norway">Norway</option>
+<option value="Oman">Oman</option>
+<option value="Organisation of African Unity (OAU)">Organisation of African Unity (OAU)</option>
+<option value="Pakistan">Pakistan</option>
+<option value="Palau">Palau</option>
+<option value="Palestine">Palestine</option>
+<option value="Panama">Panama</option>
+<option value="Papua New Guinea">Papua New Guinea</option>
+<option value="Paraguay">Paraguay</option>
+<option value="Peru">Peru</option>
+<option value="Philippines">Philippines</option>
+<option value="Poland">Poland</option>
+<option value="Portugal">Portugal</option>
+<option value="Qatar">Qatar</option>
+<option value="Romania">Romania</option>
+<option value="Russia">Russia</option>
+<option value="Rwanda">Rwanda</option>
+<option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
+<option value="Saint Lucia">Saint Lucia</option>
+<option value="Saint Vincent and the Grenadines">Saint Vincent and the Grenadines</option>
+<option value="Samoa">Samoa</option>
+<option value="San Marino">San Marino</option>
+<option value="Sao Tome and Principe">Sao Tome and Principe</option>
+<option value="Saudi Arabia">Saudi Arabia</option>
+<option value="Senegal">Senegal</option>
+<option value="Serbia">Serbia</option>
+<option value="Serbia and Montenegro">Serbia and Montenegro</option>
+<option value="Seychelles">Seychelles</option>
+<option value="Sierra Leone">Sierra Leone</option>
+<option value="Singapore">Singapore</option>
+<option value="Slovakia">Slovakia</option>
+<option value="Slovenia">Slovenia</option>
+<option value="Solomon Islands">Solomon Islands</option>
+<option value="Somalia">Somalia</option>
+<option value="South Africa">South Africa</option>
+<option value="South Korea">South Korea</option>
+<option value="South Sudan">South Sudan</option>
+<option value="South Yemen">South Yemen</option>
+<option value="Soviet Union">Soviet Union</option>
+<option value="Spain">Spain</option>
+<option value="Sri Lanka">Sri Lanka</option>
+<option value="Sudan">Sudan</option>
+<option value="Suriname">Suriname</option>
+<option value="Sweden">Sweden</option>
+<option value="Switzerland">Switzerland</option>
+<option value="Syria">Syria</option>
+<option value="Taiwan">Taiwan</option>
+<option value="Tajikistan">Tajikistan</option>
+<option value="Tanzania">Tanzania</option>
+<option value="Thailand">Thailand</option>
+<option value="Timor Leste">Timor Leste</option>
+<option value="Togo">Togo</option>
+<option value="Tonga">Tonga</option>
+<option value="Trinidad and Tobago">Trinidad and Tobago</option>
+<option value="Tunisia">Tunisia</option>
+<option value="Turkiye">Turkiye</option>
+<option value="Turkmenistan">Turkmenistan</option>
+<option value="Tuvalu">Tuvalu</option>
+<option value="Uganda">Uganda</option>
+<option value="Ukraine">Ukraine</option>
+<option value="United Arab Emirates">United Arab Emirates</option>
+<option value="United Kingdom">United Kingdom</option>
+<option value="United Nations (UN)">United Nations (UN)</option>
+<option value="United States">United States</option>
+<option value="Uruguay">Uruguay</option>
+<option value="Uzbekistan">Uzbekistan</option>
+<option value="Vanuatu">Vanuatu</option>
+<option value="Venezuela">Venezuela</option>
+<option value="Vietnam">Vietnam</option>
+<option value="West Germany">West Germany</option>
+<option value="World Bank (IBRD)">World Bank (IBRD)</option>
+<option value="Yemen">Yemen</option>
+<option value="Yugoslavia">Yugoslavia</option>
+<option value="Zaire">Zaire</option>
+<option value="Zambia">Zambia</option>
+<option value="Zimbabwe">Zimbabwe</option>
+
+                    </select>
+                </div>
+                
+                <div class="selector-group">
+                    <label for="visitedCountry">Select Visited Country:</label>
+                    <select id="visitedCountry">
+                        <option value="">-- Select a country --</option>
+                        <option value="Abkhazia">Abkhazia</option>
+<option value="Afghanistan">Afghanistan</option>
+<option value="Albania">Albania</option>
+<option value="Algeria">Algeria</option>
+<option value="Andorra">Andorra</option>
+<option value="Angola">Angola</option>
+<option value="Antigua and Barbuda">Antigua and Barbuda</option>
+<option value="Argentina">Argentina</option>
+<option value="Armenia">Armenia</option>
+<option value="Australia">Australia</option>
+<option value="Austria">Austria</option>
+<option value="Azerbaijan">Azerbaijan</option>
+<option value="Bahamas">Bahamas</option>
+<option value="Bahrain">Bahrain</option>
+<option value="Bangladesh">Bangladesh</option>
+<option value="Barbados">Barbados</option>
+<option value="Belarus">Belarus</option>
+<option value="Belgium">Belgium</option>
+<option value="Belize">Belize</option>
+<option value="Benin">Benin</option>
+<option value="Bhutan">Bhutan</option>
+<option value="Bolivia">Bolivia</option>
+<option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
+<option value="Botswana">Botswana</option>
+<option value="Brazil">Brazil</option>
+<option value="Brunei">Brunei</option>
+<option value="Bulgaria">Bulgaria</option>
+<option value="Burkina Faso">Burkina Faso</option>
+<option value="Burundi">Burundi</option>
+<option value="Cabo Verde">Cabo Verde</option>
+<option value="Cambodia">Cambodia</option>
+<option value="Cameroon">Cameroon</option>
+<option value="Canada">Canada</option>
+<option value="Central African Republic">Central African Republic</option>
+<option value="Chad">Chad</option>
+<option value="Chile">Chile</option>
+<option value="China">China</option>
+<option value="Colombia">Colombia</option>
+<option value="Comoros">Comoros</option>
+<option value="Congo-Brazzaville">Congo-Brazzaville</option>
+<option value="Congo-Kinshasa">Congo-Kinshasa</option>
+<option value="Costa Rica">Costa Rica</option>
+<option value="Cote d'Ivoire">Cote d'Ivoire</option>
+<option value="Crimea">Crimea</option>
+<option value="Croatia">Croatia</option>
+<option value="Cuba">Cuba</option>
+<option value="Cyprus">Cyprus</option>
+<option value="Czechia">Czechia</option>
+<option value="Czechoslovakia">Czechoslovakia</option>
+<option value="Denmark">Denmark</option>
+<option value="Djibouti">Djibouti</option>
+<option value="Dominica">Dominica</option>
+<option value="Dominican Republic">Dominican Republic</option>
+<option value="Donetsk">Donetsk</option>
+<option value="East Jerusalem">East Jerusalem</option>
+<option value="Ecuador">Ecuador</option>
+<option value="Egypt">Egypt</option>
+<option value="El Salvador">El Salvador</option>
+<option value="Equatorial Guinea">Equatorial Guinea</option>
+<option value="Eritrea">Eritrea</option>
+<option value="Estonia">Estonia</option>
+<option value="Eswatini">Eswatini</option>
+<option value="Ethiopia">Ethiopia</option>
+<option value="Fiji">Fiji</option>
+<option value="Finland">Finland</option>
+<option value="France">France</option>
+<option value="Gabon">Gabon</option>
+<option value="Gambia">Gambia</option>
+<option value="Georgia">Georgia</option>
+<option value="Germany">Germany</option>
+<option value="Ghana">Ghana</option>
+<option value="Greece">Greece</option>
+<option value="Grenada">Grenada</option>
+<option value="Guatemala">Guatemala</option>
+<option value="Guinea">Guinea</option>
+<option value="Guinea-Bissau">Guinea-Bissau</option>
+<option value="Guyana">Guyana</option>
+<option value="Haiti">Haiti</option>
+<option value="Holy See">Holy See</option>
+<option value="Honduras">Honduras</option>
+<option value="Hungary">Hungary</option>
+<option value="Iceland">Iceland</option>
+<option value="India">India</option>
+<option value="Indonesia">Indonesia</option>
+<option value="Iran">Iran</option>
+<option value="Iraq">Iraq</option>
+<option value="Ireland">Ireland</option>
+<option value="Israel">Israel</option>
+<option value="Israeli Settlements">Israeli Settlements</option>
+<option value="Italy">Italy</option>
+<option value="Jamaica">Jamaica</option>
+<option value="Jammu and Kashmir">Jammu and Kashmir</option>
+<option value="Japan">Japan</option>
+<option value="Jordan">Jordan</option>
+<option value="Kazakhstan">Kazakhstan</option>
+<option value="Kenya">Kenya</option>
+<option value="Kherson">Kherson</option>
+<option value="Kiribati">Kiribati</option>
+<option value="Kosovo">Kosovo</option>
+<option value="Kuwait">Kuwait</option>
+<option value="Kyrgyzstan">Kyrgyzstan</option>
+<option value="Laos">Laos</option>
+<option value="Latvia">Latvia</option>
+<option value="Lebanon">Lebanon</option>
+<option value="Lesotho">Lesotho</option>
+<option value="Liberia">Liberia</option>
+<option value="Libya">Libya</option>
+<option value="Liechtenstein">Liechtenstein</option>
+<option value="Lithuania">Lithuania</option>
+<option value="Luhansk">Luhansk</option>
+<option value="Luxembourg">Luxembourg</option>
+<option value="Madagascar">Madagascar</option>
+<option value="Malawi">Malawi</option>
+<option value="Malaysia">Malaysia</option>
+<option value="Maldives">Maldives</option>
+<option value="Mali">Mali</option>
+<option value="Malta">Malta</option>
+<option value="Marshall Islands">Marshall Islands</option>
+<option value="Mauritania">Mauritania</option>
+<option value="Mauritius">Mauritius</option>
+<option value="Mexico">Mexico</option>
+<option value="Micronesia">Micronesia</option>
+<option value="Moldova">Moldova</option>
+<option value="Monaco">Monaco</option>
+<option value="Mongolia">Mongolia</option>
+<option value="Montenegro">Montenegro</option>
+<option value="Morocco">Morocco</option>
+<option value="Mozambique">Mozambique</option>
+<option value="Myanmar">Myanmar</option>
+<option value="Nagorno-Karabakh">Nagorno-Karabakh</option>
+<option value="Namibia">Namibia</option>
+<option value="Nauru">Nauru</option>
+<option value="Nepal">Nepal</option>
+<option value="Netherlands">Netherlands</option>
+<option value="New Zealand">New Zealand</option>
+<option value="Nicaragua">Nicaragua</option>
+<option value="Niger">Niger</option>
+<option value="Nigeria">Nigeria</option>
+<option value="North Korea">North Korea</option>
+<option value="North Macedonia">North Macedonia</option>
+<option value="Northern Cyprus">Northern Cyprus</option>
+<option value="Norway">Norway</option>
+<option value="Oman">Oman</option>
+<option value="Pakistan">Pakistan</option>
+<option value="Palau">Palau</option>
+<option value="Palestine">Palestine</option>
+<option value="Panama">Panama</option>
+<option value="Papua New Guinea">Papua New Guinea</option>
+<option value="Paraguay">Paraguay</option>
+<option value="Peru">Peru</option>
+<option value="Philippines">Philippines</option>
+<option value="Poland">Poland</option>
+<option value="Portugal">Portugal</option>
+<option value="Qatar">Qatar</option>
+<option value="Romania">Romania</option>
+<option value="Russia">Russia</option>
+<option value="Rwanda">Rwanda</option>
+<option value="SIngapore">SIngapore</option>
+<option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
+<option value="Saint Lucia">Saint Lucia</option>
+<option value="Saint Vincent and the Grenadines">Saint Vincent and the Grenadines</option>
+<option value="Samoa">Samoa</option>
+<option value="San Marino">San Marino</option>
+<option value="Sao Tome and Principe">Sao Tome and Principe</option>
+<option value="Saudi Arabia">Saudi Arabia</option>
+<option value="Senegal">Senegal</option>
+<option value="Serbia">Serbia</option>
+<option value="Serbia and Montenegro">Serbia and Montenegro</option>
+<option value="Seychelles">Seychelles</option>
+<option value="Sierra Leone">Sierra Leone</option>
+<option value="Singapore">Singapore</option>
+<option value="Slovakia">Slovakia</option>
+<option value="Slovenia">Slovenia</option>
+<option value="Solomon Islands">Solomon Islands</option>
+<option value="Somalia">Somalia</option>
+<option value="South Africa">South Africa</option>
+<option value="South Korea">South Korea</option>
+<option value="South Sudan">South Sudan</option>
+<option value="South Yemen">South Yemen</option>
+<option value="Soviet Union">Soviet Union</option>
+<option value="Spain">Spain</option>
+<option value="Sri Lanka">Sri Lanka</option>
+<option value="Sudan">Sudan</option>
+<option value="Suriname">Suriname</option>
+<option value="Sweden">Sweden</option>
+<option value="Switzerland">Switzerland</option>
+<option value="Syria">Syria</option>
+<option value="Taiwan">Taiwan</option>
+<option value="Tajikistan">Tajikistan</option>
+<option value="Tanzania">Tanzania</option>
+<option value="Thailand">Thailand</option>
+<option value="Timor Leste">Timor Leste</option>
+<option value="Togo">Togo</option>
+<option value="Tonga">Tonga</option>
+<option value="Transnistria">Transnistria</option>
+<option value="Trinidad and Tobago">Trinidad and Tobago</option>
+<option value="Tunisia">Tunisia</option>
+<option value="Turkiye">Turkiye</option>
+<option value="Turkmenistan">Turkmenistan</option>
+<option value="Tuvalu">Tuvalu</option>
+<option value="Uganda">Uganda</option>
+<option value="Ukraine">Ukraine</option>
+<option value="United Arab Emirates">United Arab Emirates</option>
+<option value="United Kingdom">United Kingdom</option>
+<option value="United States">United States</option>
+<option value="Unknown">Unknown</option>
+<option value="Uruguay">Uruguay</option>
+<option value="Uzbekistan">Uzbekistan</option>
+<option value="Vanuatu">Vanuatu</option>
+<option value="Venezuela">Venezuela</option>
+<option value="Vietnam">Vietnam</option>
+<option value="West Germany">West Germany</option>
+<option value="Western Sahara">Western Sahara</option>
+<option value="Yemen">Yemen</option>
+<option value="Yemen Arab Republic">Yemen Arab Republic</option>
+<option value="Yugoslavia">Yugoslavia</option>
+<option value="Zaire">Zaire</option>
+<option value="Zambia">Zambia</option>
+<option value="Zimbabwe">Zimbabwe</option>
+
+                    </select>
+                </div>
+                
+                <button onclick="updateDyadView()">View Relationship</button>
+            </div>
+            
+            <div class="selector-group">
+                <label for="predefinedPair">Or select a pre-defined country pair:</label>
+                <select id="predefinedPair" onchange="selectPredefinedPair()">
+                    <option value="">-- Select a pre-defined pair --</option>
+                    <option value="Palestine_United States">Palestine → United States</option>
+<option value="Palestine_Belgium">Palestine → Belgium</option>
+<option value="Palestine_France">Palestine → France</option>
+<option value="Palestine_United Kingdom">Palestine → United Kingdom</option>
+<option value="Palestine_Germany">Palestine → Germany</option>
+<option value="United Nations (UN)_United States">United Nations (UN) → United States</option>
+<option value="United Nations (UN)_Belgium">United Nations (UN) → Belgium</option>
+<option value="United Nations (UN)_France">United Nations (UN) → France</option>
+<option value="United Nations (UN)_United Kingdom">United Nations (UN) → United Kingdom</option>
+<option value="United Nations (UN)_Germany">United Nations (UN) → Germany</option>
+<option value="North Atlantic Treaty Organization (NATO)_United States">North Atlantic Treaty Organization (NATO) → United States</option>
+<option value="North Atlantic Treaty Organization (NATO)_Belgium">North Atlantic Treaty Organization (NATO) → Belgium</option>
+<option value="North Atlantic Treaty Organization (NATO)_France">North Atlantic Treaty Organization (NATO) → France</option>
+<option value="North Atlantic Treaty Organization (NATO)_United Kingdom">North Atlantic Treaty Organization (NATO) → United Kingdom</option>
+<option value="North Atlantic Treaty Organization (NATO)_Germany">North Atlantic Treaty Organization (NATO) → Germany</option>
+<option value="European Commission (EC)_United States">European Commission (EC) → United States</option>
+<option value="European Commission (EC)_Belgium">European Commission (EC) → Belgium</option>
+<option value="European Commission (EC)_France">European Commission (EC) → France</option>
+<option value="European Commission (EC)_United Kingdom">European Commission (EC) → United Kingdom</option>
+<option value="European Commission (EC)_Germany">European Commission (EC) → Germany</option>
+<option value="France_United States">France → United States</option>
+<option value="France_Belgium">France → Belgium</option>
+<option value="France_United Kingdom">France → United Kingdom</option>
+<option value="France_Germany">France → Germany</option>
+
+                </select>
+            </div>
+            
+            <div id="plotContainer"></div>
+        </div>
+        
+        <script>
+            // Store the data for pre-processed dyads
+            const dyadData = {
+                "Palestine_United States": { "x": [1993, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2022, 2023, 2024], "y": [1, 2, 2, 1, 3, 3, 6, 2, 2, 1, 2, 3, 3, 3, 1, 2, 1, 2, 1, 2, 2, 2, 2, 1, 1, 2, 1] },
+"Palestine_Belgium": { "x": [1993, 1997, 1998, 2000, 2001, 2005, 2007, 2010, 2011, 2013, 2015, 2016, 2017, 2018], "y": [1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1] },
+"Palestine_France": { "x": [1990, 1991, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2022], "y": [2, 2, 1, 1, 1, 1, 1, 2, 3, 3, 1, 1, 1, 2, 4, 1, 2, 3, 4, 2, 1, 1, 2, 3, 3, 1, 1] },
+"Palestine_United Kingdom": { "x": [1993, 1996, 1997, 1998, 1999, 2001, 2005, 2007, 2009, 2010, 2011, 2012, 2013, 2014], "y": [1, 1, 2, 2, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1] },
+"Palestine_Germany": { "x": [1993, 1995, 1999, 2007, 2010, 2011, 2012, 2013, 2016, 2017, 2019, 2021, 2022], "y": [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1] },
+"United Nations (UN)_United States": { "x": [1990, 1991, 1992, 1993, 1994, 1995, 1998, 2001, 2002, 2003, 2004, 2006, 2007, 2008, 2009, 2011, 2012, 2013, 2014, 2015, 2016, 2018, 2019], "y": [2, 2, 2, 1, 2, 1, 1, 4, 2, 1, 2, 1, 2, 1, 4, 2, 3, 6, 5, 5, 9, 3, 1] },
+"United Nations (UN)_Belgium": { "x": [1993, 1994, 1999, 2000, 2001, 2003, 2004, 2005, 2006, 2007, 2009, 2012, 2014, 2015, 2016, 2017, 2018, 2021, 2023, 2024], "y": [1, 1, 2, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 2, 1, 1, 1, 2, 1] },
+"United Nations (UN)_France": { "x": [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2023, 2024], "y": [3, 2, 1, 4, 1, 4, 1, 5, 1, 3, 2, 5, 1, 2, 2, 3, 2, 1, 1, 4, 1, 3, 4, 4, 2, 1, 2, 1, 1, 1, 1] },
+"United Nations (UN)_United Kingdom": { "x": [1990, 1991, 1992, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2014, 2016, 2017, 2018, 2021, 2023], "y": [1, 1, 2, 2, 2, 4, 1, 1, 1, 2, 1, 1, 3, 1, 1, 3, 3, 1, 2, 1, 1, 1, 2, 1, 1, 1] },
+"United Nations (UN)_Germany": { "x": [1993, 1995, 1996, 1998, 1999, 2000, 2001, 2002, 2003, 2005, 2006, 2007, 2008, 2011, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2024], "y": [1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 2, 1, 1, 2, 3, 1, 1, 2, 1] },
+"North Atlantic Treaty Organization (NATO)_United States": { "x": [1990, 1991, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2021, 2022, 2023, 2024], "y": [3, 2, 2, 1, 3, 4, 7, 2, 6, 2, 3, 4, 6, 4, 2, 3, 2, 3, 4, 4, 4, 6, 5, 4, 3, 3, 4, 3, 5, 3, 2, 4, 5] },
+"North Atlantic Treaty Organization (NATO)_Belgium": { "x": [1996, 1997, 1999, 2000, 2003, 2004, 2007, 2009, 2012, 2013, 2014, 2015], "y": [2, 1, 2, 1, 1, 2, 1, 2, 2, 1, 2, 1] },
+"North Atlantic Treaty Organization (NATO)_France": { "x": [1990, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024], "y": [1, 2, 3, 2, 2, 1, 1, 2, 1, 1, 2, 1, 1, 4, 4, 2, 1, 1, 2, 2, 1, 1, 2, 1, 2, 2, 1, 1] },
+"North Atlantic Treaty Organization (NATO)_United Kingdom": { "x": [1990, 1991, 1992, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2019, 2021, 2022, 2023, 2024], "y": [4, 1, 1, 1, 4, 1, 1, 1, 2, 1, 1, 3, 2, 1, 2, 1, 2, 2, 3, 3, 2, 1, 4, 2, 2, 1, 4, 2, 2, 1, 2] },
+"North Atlantic Treaty Organization (NATO)_Germany": { "x": [1991, 1992, 1993, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024], "y": [1, 2, 2, 1, 4, 1, 1, 4, 4, 3, 7, 3, 2, 5, 3, 3, 3, 3, 3, 3, 2, 1, 3, 5, 3, 1, 4, 2, 3, 2, 4, 5, 3] },
+"European Commission (EC)_United States": { "x": [1990, 1991, 1992, 1993, 1998, 1999, 2000, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2012, 2013, 2014, 2018, 2021, 2022, 2023, 2024], "y": [2, 1, 3, 3, 2, 2, 1, 1, 1, 1, 1, 2, 2, 2, 2, 1, 2, 2, 2, 1, 5, 1] },
+"European Commission (EC)_Belgium": { "x": [2012, 2013, 2014, 2015, 2016], "y": [1, 3, 2, 3, 2] },
+"European Commission (EC)_France": { "x": [1990, 1991, 1992, 1993, 1994, 1995, 1997, 1998, 1999, 2000, 2004, 2005, 2006, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2023, 2024], "y": [3, 3, 3, 1, 1, 3, 2, 1, 2, 4, 1, 1, 3, 3, 1, 2, 2, 9, 12, 10, 12, 11, 8, 9, 3, 10, 13, 16, 16] },
+"European Commission (EC)_United Kingdom": { "x": [1991, 1992, 1995, 1998, 2001, 2002, 2005, 2006, 2007, 2008, 2009, 2010, 2013, 2014, 2015, 2020, 2021, 2023], "y": [3, 5, 3, 6, 1, 2, 5, 2, 1, 2, 1, 1, 3, 2, 1, 1, 2, 5] },
+"European Commission (EC)_Germany": { "x": [1990, 1991, 1992, 1993, 1994, 1997, 1998, 1999, 2002, 2003, 2005, 2006, 2007, 2009, 2010, 2012, 2013, 2014, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2023, 2024], "y": [1, 1, 3, 2, 3, 1, 1, 1, 1, 1, 1, 3, 4, 2, 1, 5, 4, 5, 8, 6, 7, 7, 4, 4, 5, 13, 17] },
+"France_United States": { "x": [1990, 1992, 1993, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2003, 2004, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2022, 2024], "y": [2, 1, 1, 2, 1, 1, 1, 2, 2, 2, 1, 2, 1, 3, 3, 1, 3, 2, 2, 1, 2, 2, 3, 1, 2, 1, 2, 2] },
+"France_Belgium": { "x": [1993, 1994, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024], "y": [1, 1, 1, 1, 1, 1, 5, 1, 4, 4, 4, 3, 3, 5, 4, 9, 9, 7, 7, 10, 12, 6, 6, 9, 7, 5, 5, 7, 7, 7] },
+"France_United Kingdom": { "x": [1991, 1992, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2003, 2004, 2005, 2007, 2008, 2009, 2010, 2012, 2013, 2014, 2015, 2018, 2019, 2020, 2021, 2022, 2023, 2024], "y": [1, 2, 1, 1, 1, 3, 2, 2, 2, 1, 1, 2, 1, 3, 1, 3, 3, 1, 2, 1, 1, 2, 1, 2, 1, 1, 1] },
+"France_Germany": { "x": [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024], "y": [3, 2, 2, 2, 2, 2, 2, 1, 4, 4, 4, 4, 6, 5, 3, 5, 7, 3, 5, 2, 3, 4, 4, 1, 6, 6, 7, 4, 3, 3, 1, 5, 4, 5] },
+
+            };
+            
+            // Initial plot data
+            const initialData = [
+        {
+            "x": [1993, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2022, 2023, 2024],
+            "y": [1, 2, 2, 1, 3, 3, 6, 2, 2, 1, 2, 3, 3, 3, 1, 2, 1, 2, 1, 2, 2, 2, 2, 1, 1, 2, 1],
+            "mode": "lines+markers",
+            "name": "Palestine → United States",
+            "line": { "width": 3 }
+        },
+        
+        {
+            "x": [1993, 1997, 1998, 2000, 2001, 2005, 2007, 2010, 2011, 2013, 2015, 2016, 2017, 2018],
+            "y": [1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1],
+            "mode": "lines+markers",
+            "name": "Palestine → Belgium",
+            "line": { "width": 3 }
+        },
+        
+        {
+            "x": [1990, 1991, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2022],
+            "y": [2, 2, 1, 1, 1, 1, 1, 2, 3, 3, 1, 1, 1, 2, 4, 1, 2, 3, 4, 2, 1, 1, 2, 3, 3, 1, 1],
+            "mode": "lines+markers",
+            "name": "Palestine → France",
+            "line": { "width": 3 }
+        },
+        
+        {
+            "x": [1993, 1996, 1997, 1998, 1999, 2001, 2005, 2007, 2009, 2010, 2011, 2012, 2013, 2014],
+            "y": [1, 1, 2, 2, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1],
+            "mode": "lines+markers",
+            "name": "Palestine → United Kingdom",
+            "line": { "width": 3 }
+        },
+        
+        {
+            "x": [1993, 1995, 1999, 2007, 2010, 2011, 2012, 2013, 2016, 2017, 2019, 2021, 2022],
+            "y": [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1],
+            "mode": "lines+markers",
+            "name": "Palestine → Germany",
+            "line": { "width": 3 }
+        }
+        ];
+            
+            // Create initial plot
+            const layout = {
+                title: 'Diplomatic Visits Between Countries Over Time',
+                xaxis: { title: 'Year' },
+                yaxis: { title: 'Number of Visits' },
+                hovermode: 'closest',
+                template: 'plotly_white'
+            };
+            
+            Plotly.newPlot('plotContainer', initialData, layout);
+            
+            // Function to update the plot based on country selections
+            function updateDyadView() {
+                const visitingCountry = document.getElementById('visitingCountry').value;
+                const visitedCountry = document.getElementById('visitedCountry').value;
+                
+                if (!visitingCountry || !visitedCountry) {
+                    alert('Please select both a visiting country and a visited country');
+                    return;
+                }
+                
+                if (visitingCountry === visitedCountry) {
+                    alert('Please select different countries for visiting and visited');
+                    return;
+                }
+                
+                const pairKey = `${visitingCountry}_${visitedCountry}`;
+                
+                // Check if we have pre-computed data
+                if (dyadData[pairKey]) {
+                    // Update the plot with pre-computed data, ensuring x and y are arrays
+                    const trace = {
+                        x: Array.isArray(dyadData[pairKey].x) ? dyadData[pairKey].x : [dyadData[pairKey].x],
+                        y: Array.isArray(dyadData[pairKey].y) ? dyadData[pairKey].y : [dyadData[pairKey].y],
+                        mode: 'lines+markers',
+                        name: `${visitingCountry} → ${visitedCountry}`,
+                        line: { width: 3 }
+                    };
+                    
+                    Plotly.react('plotContainer', [trace], {
+                        ...layout,
+                        title: `Diplomatic Visits: ${visitingCountry} → ${visitedCountry} (1990-2024)`
+                    });
+                } else {
+                    // Display a placeholder message
+                    Plotly.react('plotContainer', [], {
+                        ...layout,
+                        title: `No recorded diplomatic visits from ${visitingCountry} to ${visitedCountry}`,
+                        annotations: [{
+                            text: 'No data available for this specific country pair',
+                            showarrow: false,
+                            font: { size: 16 },
+                            x: 0.5,
+                            y: 0.5,
+                            xref: 'paper',
+                            yref: 'paper'
+                        }]
+                    });
+                }
+            }
+            
+            // Function to handle pre-defined pair selection
+            function selectPredefinedPair() {
+                const pairValue = document.getElementById('predefinedPair').value;
+                if (!pairValue) return;
+                
+                const [visiting, visited] = pairValue.split('_');
+                
+                // Update the dropdowns
+                document.getElementById('visitingCountry').value = visiting;
+                document.getElementById('visitedCountry').value = visited;
+                
+                // Update the view
+                updateDyadView();
+            }
+        </script>
+    </body>
+    </html>
+    
