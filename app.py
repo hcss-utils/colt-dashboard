@@ -1,4 +1,4 @@
-from flask import Flask, send_from_directory, redirect, url_for
+from flask import Flask, send_from_directory, redirect, url_for, render_template_string
 import os
 
 app = Flask(__name__)
@@ -29,6 +29,31 @@ def leader_timeline_viz():
 @app.route('/diversity_viz.html')
 def diversity_viz():
     return send_from_directory('static', 'diversity_viz.html')
+
+# Add routes for image files
+@app.route('/trips_per_year.png')
+def trips_per_year():
+    return send_from_directory('static', 'trips_per_year.png')
+
+@app.route('/top_destinations.png')
+def top_destinations():
+    return send_from_directory('static', 'top_destinations.png')
+
+@app.route('/region_distribution.png')
+def region_distribution():
+    return send_from_directory('static', 'region_distribution.png')
+
+@app.route('/trip_duration.png')
+def trip_duration():
+    return send_from_directory('static', 'trip_duration.png')
+
+@app.route('/top_leaders.png')
+def top_leaders():
+    return send_from_directory('static', 'top_leaders.png')
+
+@app.route('/region_flow_heatmap.png')
+def region_flow_heatmap():
+    return send_from_directory('static', 'region_flow_heatmap.png')
 
 @app.route('/health')
 def health():
