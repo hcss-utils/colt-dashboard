@@ -13,6 +13,23 @@ def serve_static(path):
     """Serve static files"""
     return send_from_directory('static', path)
 
+# Add specific routes for each visualization
+@app.route('/comprehensive_trips_viz.html')
+def comprehensive_viz():
+    return send_from_directory('static', 'comprehensive_trips_viz.html')
+
+@app.route('/country_pair_viz.html')
+def country_pair_viz():
+    return send_from_directory('static', 'country_pair_viz.html')
+
+@app.route('/leader_timeline_viz.html')
+def leader_timeline_viz():
+    return send_from_directory('static', 'leader_timeline_viz.html')
+
+@app.route('/diversity_viz.html')
+def diversity_viz():
+    return send_from_directory('static', 'diversity_viz.html')
+
 @app.route('/health')
 def health():
     """Health check endpoint for Heroku"""
