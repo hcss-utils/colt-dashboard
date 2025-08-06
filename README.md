@@ -1,34 +1,101 @@
-# COLT Dataset Visualization Dashboard
+# colt-dashboard
 
-This repository contains code for analyzing and visualizing the Country and Organization Leader Travel (COLT) dataset from the Frederick S. Pardee Institute for International Futures at the University of Denver.
+## Overview
 
-## About the Dataset
+This is a Flask application built with Python.
 
-The COLT dataset tracks diplomatic travel of heads of government and state from 1990 to 2024, providing insights into global diplomatic relations, patterns, and trends.
+A web application originally hosted on Heroku.
 
-## Features
+## Technology Stack
 
-- Static visualizations of travel patterns, destinations, and durations
-- Interactive exploration of top visiting and visited countries
-- Country pair analysis to explore diplomatic relationships
-- Leader timeline visualization
-- Diplomatic diversity metrics visualization
+- **Language**: Python
+- **Framework**: Flask
+- **Platform**: Originally deployed on Heroku
+
+## Project Structure
+
+- `requirements.txt` - Python dependencies
+- `Procfile` - Heroku process configuration
+
+## Setup Instructions
+
+### Prerequisites
+
+- Python 3.8 or higher
+- pip
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/hcss-utils/colt-dashboard.git
+   cd colt-dashboard
+   ```
+
+2. Create a virtual environment:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
+
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. Set up environment variables:
+   ```bash
+   cp .env.example .env
+   # Edit .env with your configuration
+   ```
+
+5. Run the application:
+   ```bash
+   python app.py  # or as specified in Procfile
+   ```
 
 ## Deployment
 
-This application is deployed on Heroku at [insert-your-heroku-app-url-here].
+### Deploying to Heroku
 
-## Local Development
+1. Create a new Heroku app:
+   ```bash
+   heroku create your-app-name
+   ```
 
-1. Clone this repository
-2. Install dependencies: `pip install -r requirements.txt`
-3. Run locally: `python app.py`
-4. Access at http://localhost:5000
+2. Set environment variables:
+   ```bash
+   heroku config:set KEY=value
+   ```
 
-## Data Source
+3. Deploy:
+   ```bash
+   git push heroku main
+   ```
 
-Country and Organization Leader Travel (COLT) dataset from the Frederick S. Pardee Institute for International Futures at the University of Denver.
+### Alternative Deployment Options
+
+- **Vercel**: For static sites and Next.js apps
+- **Netlify**: For static sites
+- **Railway**: Similar to Heroku, good for full-stack apps
+- **Render**: Another Heroku alternative
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ## License
 
-MIT
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Support
+
+For support, please open an issue in the GitHub repository.
+
+---
+
+*This application was originally hosted on Heroku and has been archived here for preservation and future use.*
